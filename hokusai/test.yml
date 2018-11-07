@@ -12,20 +12,21 @@ services:
     - DATABASE_HOST=exchange-db
     - DATABASE_USER=postgres
     - REDIS_URL=redis://exchange-redis
-
-    - CI_PULL_REQUEST=$CI_PULL_REQUEST
-    - CIRCLE_PULL_REQUEST=$CIRCLE_PULL_REQUEST
-    - CIRCLE_BUILD_NUM=$CIRCLE_BUILD_NUM
-    - DANGER_GITHUB_API_TOKEN=$DANGER_GITHUB_API_TOKEN
-    - COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN
-    - CI=$CI
-
+    - CI
+    - CIRCLECI
+    - CIRCLE_BRANCH
+    - CIRCLE_BUILD_NUM
+    - CIRCLE_NODE_INDEX
+    - CIRCLE_NODE_TOTAL
+    - CIRCLE_PULL_REQUEST
+    - CIRCLE_SHA1
+    - CI_PULL_REQUEST
+    - COVERALLS_REPO_TOKEN
+    - DANGER_GITHUB_API_TOKEN
     command: ./hokusai/ci.sh
     depends_on:
       - exchange-db
       - exchange-redis
-    volumes:
-      - "../.git:/app/.git:ro"
   exchange-db:
     image: postgres:9.6-alpine
   exchange-redis:
