@@ -1,15 +1,17 @@
 version: 2
 jobs:
   test:
-    docker:
-      - image: artsy/hokusai:0.4.4
+    machine:
+      image: circleci/classic:latest
     steps:
       - add_ssh_keys
       - checkout
-      - setup_remote_docker
       - run:
           name: Test
-          command: hokusai test
+          command: |
+            pyenv local 2.7.12
+            pip install hokusai==0.4.4
+            hokusai test
   push:
     docker:
       - image: artsy/hokusai:0.4.4
